@@ -47,7 +47,7 @@ public class test extends javax.swing.JFrame {
         }
         jTable1.setModel(defaultModel);
     }
-
+    /// asdasdasdas test commit
     public void list() // Chép ArrayList lên table
     {
         if (cusBUS.getList() == null) {
