@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class orderdetail {
+public class billdetail {
     @Id
-    private int orderdetailID;
+    private int billdetailID;
     @Column 
-    private int orderID;
+    private int billID;
     @Column
     private int productID;
     @Column
@@ -20,12 +20,12 @@ public class orderdetail {
     @Column
     private int price;
 
-    public orderdetail(int orderID, int productID, int quantity, int price) {
-        this.orderID = orderID;
+    public billdetail(int billID, int productID, int quantity, int price) {
+        this.billID = billID;
         this.productID = productID;
         this.quantity = quantity;
         this.price = price;
     }
     
-    public orderdetail(){}
+    public billdetail(){}
 }

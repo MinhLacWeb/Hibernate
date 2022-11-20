@@ -5,7 +5,7 @@
  */
 package DAL;
 
-import Entity.orderdetail;
+import Entity.billdetail;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Session;
@@ -13,35 +13,35 @@ import org.hibernate.Session;
  *
  * @author Lộc
  */
-public class OrderdetailDAL {
+public class BilldetailDAL {
     private Session session;
     
-    public OrderdetailDAL()
+    public BilldetailDAL()
     {
         session = HibernateUtils.getSessionFactory().openSession();
     }
     
-    public List loadOrderdetail() {
-        List<orderdetail> orderdetail;
+    public List loadBilldetail() {
+        List<billdetail> billdetail;
         session.beginTransaction();
-        orderdetail = session.createQuery("FROM orderdetail", orderdetail.class).list();
+        billdetail = session.createQuery("FROM billdetail", billdetail.class).list();
         session.getTransaction().commit();
-        return orderdetail;
+        return billdetail;
 
     }
     
-    public void addOrderdetail(orderdetail o)
+    public void addBilldetail(billdetail b)
     {
-        session.save(o);  
+        session.save(b);  
     }
     
-    public void updateOrderdetail(orderdetail o)
+    public void updateBilldetail(billdetail b)
     {
-        session.update(o);
+        session.update(b);
     }
     
-    public void deleteOrderdetail(orderdetail o)
+    public void deleteBilldetail(billdetail b)
     {
-        session.delete(o);
+        session.delete(b);
     }
 }

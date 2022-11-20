@@ -21,6 +21,7 @@
         <mapping class="Entity.khachhang" />
         <mapping class="Entity.customer" />
         <mapping class="Entity.bill" />
+        <mapping class="Entity.billdetail" />
     </session-factory>
 </hibernate-configuration>
 
