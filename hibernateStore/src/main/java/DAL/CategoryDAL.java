@@ -34,7 +34,9 @@ public class CategoryDAL {
     
     public void updateCategory(category c)
     {
+        session.beginTransaction();
         session.update(c);
+        session.getTransaction().commit();
     }
     
     public void deleteCategory(category c)
