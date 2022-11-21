@@ -40,7 +40,8 @@ public class test extends javax.swing.JFrame {
         for (customer c : arrCustomer) {
             data = new Vector();
             data.add(c.getCustomerID());//indext table = 0
-            data.add(c.getFull_name());//1
+            data.add(c.getFirst_name());//1
+            data.add(c.getLast_name());
             data.add(c.getAddress());//2
             data.add(c.getCity());//3 ý dòng xết ấy
             defaultModel.addRow(data);
