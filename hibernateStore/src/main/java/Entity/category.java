@@ -20,11 +20,14 @@ public class category {
     @Column
     private String description;
 
-    public category (String name, String description) {
+    public category (int categoryID, String name, String description) {
+        this.categoryID = categoryID;
         this.name = name;
         this.description = description;
         
     }
     
     public category(){}
+
+  
 }

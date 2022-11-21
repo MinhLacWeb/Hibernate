@@ -20,75 +20,91 @@ import javax.swing.table.DefaultTableModel;
 public class CategoryGUI extends javax.swing.JFrame {
 
    CategoryBUS cateBUS = new CategoryBUS();
- 
+   
+//    ArrayList<category> Category = (ArrayList<category>) cateBUS.getList();  
     
     public CategoryGUI() throws ClassNotFoundException {
             initComponents();
-            tbl_category.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD, 12));
-            tbl_category.getTableHeader().setOpaque(false);
-            tbl_category.getTableHeader().setBackground(Color.orange);
+//            tbl_category.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD, 12));
+//            tbl_category.getTableHeader().setOpaque(false);
+//            tbl_category.getTableHeader().setBackground(Color.orange);
+            
+           
             cateBUS.list();
-            outModel((ArrayList<category>) cateBUS.getList());
+            
+            showTable((ArrayList<category>) cateBUS.getList());
 
     }
-//    
-//    private void showTable(ArrayList<Category> category)
+    
+    public void showTable(ArrayList<category> arrCategory) // Xuất ra Table từ ArrayList
+    {
+        tbl_category.removeAll();
+        DefaultTableModel defaultModel = (DefaultTableModel) tbl_category.getModel();
+        defaultModel.setRowCount(0);
+        Vector data;
+        for (category cate : arrCategory) {
+            data = new Vector();
+            data.add(cate.getCategoryID());//indext table = 0
+            data.add(cate.getName());//1
+            data.add(cate.getDescription());//2
+            defaultModel.addRow(data);
+        }
+        tbl_category.setModel(defaultModel);
+    }
+       private void showCategoryValue()
+        {
+            int row = tbl_category.getSelectedRow();
+            String value = tbl_category.getModel().getValueAt(row, 0).toString();
+            if(cateBUS.getCategoryById(value)!=null)
+            {
+                txt_categoryID.setText(tbl_category.getModel().getValueAt(row, 0).toString());
+                txt_name.setText(tbl_category.getModel().getValueAt(row, 1).toString());
+                txt_description.setText(tbl_category.getModel().getValueAt(row, 2).toString());
+            }
+        }
+//    public void list() // Chép ArrayList lên table
 //    {
-//        tbl_category.removeAll();
-//        DefaultTableModel defaultModel = (DefaultTableModel) tbl_category.getModel();
-//        defaultModel.setRowCount(0);
-//        for(Category st : category)
-//        {
-//            if(st.getStatus()==1){
-//                int categoryID = st.getCategoryID();
-//                String lastName = st.getLastName();
-//                String firstName= st.getFirstName();
-//                String enrollDate = st.getEnrollDate();
-//                
-//                defaultModel.addRow(new Object[]{categoryID, lastName, firstName, enrollDate});
-//            }
+//        if (cateBUS.getList() == null) {
+//            cateBUS.list();
 //        }
+//        ArrayList<category> arrCategory = (ArrayList<category>) cateBUS.getList();
+////        model.setRowCount(0);
+//        showTable(arrCategory);
 //    }
+
 //    
-//    private void showCategoryValue()
-//    {
-//        int row = tbl_category.getSelectedRow();
-//        int value = (int) tbl_category.getModel().getValueAt(row, 0);
-//        if (cateBUS.CheckCategoryID(value))
-//        {
-//            txt_categoryID.setText(tbl_category.getModel().getValueAt(row, 0).toString());
-//            txt_name.setText(tbl_category.getModel().getValueAt(row, 1).toString());
-//            txt_description.setText(tbl_category.getModel().getValueAt(row, 2).toString());
-//        }
-//    }
+//   
 //    
-//    private void setCategory()
-//    {
-//        int row = tbl_category.getSelectedRow();
-//        if(row == -1)
-//        {
-//           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
-//           JOptionPane.ERROR_MESSAGE);
-//        }else{
-//           int categoryID = (int) tbl_category.getModel().getValueAt(row, 0);
-//           String name = txt_name.getText();
-//           String description = txt_description.getText();
-//           int status =1; 
-//           Category tc = new Category(categoryID, name, description, status);
-//            try {
-//                cateBUS.SetCategory(tc);
-//                JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công", "Dialog",
-//                JOptionPane.ERROR_MESSAGE);
-//                category = cateBUS.getList();
-//            }catch (ClassNotFoundException ex) {
-//                JOptionPane.showMessageDialog(new JFrame(), "Sửa thất bại", "Dialog",
-//                JOptionPane.ERROR_MESSAGE);
-//                Logger.getLogger(CategoryManagement.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//           showTable(category);
-//        }
-//        
-//    }
+    private void editCategory()
+           
+    {
+        int row = tbl_category.getSelectedRow();
+        if(row == -1)
+        {
+           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
+           JOptionPane.ERROR_MESSAGE);
+        }else{
+           int categoryID = (int) tbl_category.getModel().getValueAt(row, 0);
+//           int categoryID = Integer.parseInt(txt_categoryID.getText());
+           
+           String name = txt_name.getText();
+           String description = txt_description.getText();
+           
+           category cate = new category(categoryID, name, description);
+           cateBUS.set(cate);
+           
+           JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công", "Dialog",
+                   JOptionPane.ERROR_MESSAGE);
+           
+           cateBUS.getList();
+           showTable((ArrayList<category>) cateBUS.getList());
+        }
+        
+    }
+    
+    
+    
+//   
 //    
 //    private void Search()
 //    {
@@ -115,31 +131,9 @@ public class CategoryGUI extends javax.swing.JFrame {
 //            Logger.getLogger(CategoryManagement.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
-    
-     public void outModel(ArrayList<category> arrCategory) // Xuất ra Table từ ArrayList
-    {
-        DefaultTableModel defaultModel = (DefaultTableModel) tbl_category.getModel();
-        Vector data;
-        defaultModel.setRowCount(0);
-        for (category c : arrCategory) {
-            data = new Vector();
-            data.add(c.getCategoryID());//indext table = 0
-            data.add(c.getName());//1
-            data.add(c.getDescription());//2
-            defaultModel.addRow(data);
-        }
-        tbl_category.setModel(defaultModel);
-    }
-
-    public void list() // Chép ArrayList lên table
-    {
-        if (cateBUS.getList() == null) {
-            cateBUS.list();
-        }
-        ArrayList<category> arrCategory = (ArrayList<category>) cateBUS.getList();
-//        model.setRowCount(0);
-        outModel(arrCategory);
-    }
+    //    
+//    
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -419,7 +413,7 @@ public class CategoryGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_categoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_categoryMouseClicked
-//        showCategoryValue();
+         showCategoryValue();
     }//GEN-LAST:event_tbl_categoryMouseClicked
 
     private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
@@ -438,7 +432,7 @@ public class CategoryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_delActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
-//        setCategory();
+           editCategory();
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     private void btn_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RefreshMouseClicked
