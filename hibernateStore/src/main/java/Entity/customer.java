@@ -20,7 +20,8 @@ public class customer {
     @Column
     private String city;
 
-    public customer(String first_name,String last_name, String address, String city) {
+    public customer(int customerID, String first_name,String last_name, String address, String city) {
+        this.customerID = customerID;
         this.first_name = first_name;
         this.last_name = last_name;
         this.address = address;
