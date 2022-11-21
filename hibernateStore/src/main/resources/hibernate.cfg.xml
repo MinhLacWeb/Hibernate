@@ -20,7 +20,7 @@
         <property name="show_sql">true</property>
         <mapping class="Entity.khachhang" />
         <mapping class="Entity.customer" />
-        
+        <mapping class="Entity.product" />
     </session-factory>
 </hibernate-configuration>
 

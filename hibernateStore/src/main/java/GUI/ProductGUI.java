@@ -25,7 +25,7 @@ public class ProductGUI extends javax.swing.JFrame {
     ProductBUS proBUS = new ProductBUS();
     public ProductGUI() {
         initComponents();
-        proBUS.list();
+        list();
         showTable((ArrayList<product>) proBUS.getList());
     }
     
@@ -48,6 +48,16 @@ public class ProductGUI extends javax.swing.JFrame {
         tbl_product.setModel(defaultModel);
     }
     
+    public void list() // Chép ArrayList lên table
+    {
+        if (proBUS.getList() == null) {
+            proBUS.list();
+        }
+        ArrayList<product> arrProduct = (ArrayList<product>) proBUS.getList();
+//        model.setRowCount(0);
+        showTable(arrProduct);
+    }
+    
     private void showProductValue()
     {
         int row = tbl_product.getSelectedRow();
@@ -62,65 +72,65 @@ public class ProductGUI extends javax.swing.JFrame {
             }
     }
     
-    private void editProduct()
-    {
-        int row = tbl_product.getSelectedRow();
-        if(row == -1)
-        {
-           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
-           JOptionPane.ERROR_MESSAGE);
-        }else{
-           int productID = (int) tbl_product.getModel().getValueAt(row, 0);
-           int categoryID = Integer.parseInt(txtCategoryID.getText());
-           String product_name = txtProductName.getText();
-           int amount = Integer.parseInt(txtAmount.getText());
-           float price = Float.parseFloat(txtPrice.getText());           
-//           int status =1; 
-           product pro = new product(productID, categoryID, product_name, amount, price);
-           proBUS.set(pro);
-           JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công", "Dialog",
-                   JOptionPane.INFORMATION_MESSAGE);
-           
-           proBUS.getList();
-           showTable((ArrayList<product>) proBUS.getList());
-        }       
-    }
-    
-    private void delProduct ()
-    {
-        int row = tbl_product.getSelectedRow();
-        if(row == -1)
-        {
-           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để xoá", "Dialog",
-           JOptionPane.ERROR_MESSAGE);
-        }else{
-           int productID = (int) tbl_product.getModel().getValueAt(row, 0);
-           int categoryID = Integer.parseInt(txtCategoryID.getText());
-           String product_name = txtProductName.getText();
-           int amount = Integer.parseInt(txtAmount.getText());
-           float price = Float.parseFloat(txtPrice.getText()); 
-//           int status =1; 
-           product pro = new product(productID, categoryID, product_name, amount, price);
-           proBUS.delete(pro);
-           JOptionPane.showMessageDialog(new JFrame(), "Xoá thành công", "Dialog",
-                   JOptionPane.INFORMATION_MESSAGE);
-           
-           proBUS.getList();
-           showTable((ArrayList<product>) proBUS.getList());
-        }
-    }
-    
-    private void addProduct(){
-        int productID = tbl_product.getRowCount()+1;
-        int categoryID = Integer.parseInt(txtCategoryID.getText());
-        String product_name = txtProductName.getText();
-        int amount = Integer.parseInt(txtAmount.getText());
-        float price = Float.parseFloat(txtPrice.getText()); 
-        product pro = new product(productID, categoryID, product_name, amount, price);
-        proBUS.add(pro);
-        proBUS.getList();
-        showTable((ArrayList<product>) proBUS.getList());
-    }
+//    private void editProduct()
+//    {
+//        int row = tbl_product.getSelectedRow();
+//        if(row == -1)
+//        {
+//           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
+//           JOptionPane.ERROR_MESSAGE);
+//        }else{
+//           int productID = (int) tbl_product.getModel().getValueAt(row, 0);
+//           int categoryID = Integer.parseInt(txtCategoryID.getText());
+//           String product_name = txtProductName.getText();
+//           int amount = Integer.parseInt(txtAmount.getText());
+//           float price = Float.parseFloat(txtPrice.getText());           
+////           int status =1; 
+//           product pro = new product(productID, categoryID, product_name, amount, price);
+//           proBUS.set(pro);
+//           JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công", "Dialog",
+//                   JOptionPane.INFORMATION_MESSAGE);
+//           
+//           proBUS.getList();
+//           showTable((ArrayList<product>) proBUS.getList());
+//        }       
+//    }
+//    
+//    private void delProduct ()
+//    {
+//        int row = tbl_product.getSelectedRow();
+//        if(row == -1)
+//        {
+//           JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để xoá", "Dialog",
+//           JOptionPane.ERROR_MESSAGE);
+//        }else{
+//           int productID = (int) tbl_product.getModel().getValueAt(row, 0);
+//           int categoryID = Integer.parseInt(txtCategoryID.getText());
+//           String product_name = txtProductName.getText();
+//           int amount = Integer.parseInt(txtAmount.getText());
+//           float price = Float.parseFloat(txtPrice.getText()); 
+////           int status =1; 
+//           product pro = new product(productID, categoryID, product_name, amount, price);
+//           proBUS.delete(pro);
+//           JOptionPane.showMessageDialog(new JFrame(), "Xoá thành công", "Dialog",
+//                   JOptionPane.INFORMATION_MESSAGE);
+//           
+//           proBUS.getList();
+//           showTable((ArrayList<product>) proBUS.getList());
+//        }
+//    }
+//    
+//    private void addProduct(){
+//        int productID = tbl_product.getRowCount()+1;
+//        int categoryID = Integer.parseInt(txtCategoryID.getText());
+//        String product_name = txtProductName.getText();
+//        int amount = Integer.parseInt(txtAmount.getText());
+//        float price = Float.parseFloat(txtPrice.getText()); 
+//        product pro = new product(productID, categoryID, product_name, amount, price);
+//        proBUS.add(pro);
+//        proBUS.getList();
+//        showTable((ArrayList<product>) proBUS.getList());
+//    }
     
 
     /**
@@ -364,7 +374,7 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        editProduct();
+//        editProduct();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed

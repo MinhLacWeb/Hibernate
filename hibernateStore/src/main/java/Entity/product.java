@@ -11,7 +11,7 @@ import lombok.Data;
 public class product {
     @Id
     private int productID;
-    @Id
+    @Column
     private int categoryID;
     @Column
     private String productName;
@@ -20,8 +20,7 @@ public class product {
     @Column
     private float price;
 
-    public product(int productID, int categoryID, String productName, int amount, float price) {
-        this.productID = productID;
+    public product(int categoryID, String productName, int amount, float price) {
         this.categoryID = categoryID;
         this.productName = productName;
         this.amount = amount;
