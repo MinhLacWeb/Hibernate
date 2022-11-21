@@ -88,6 +88,7 @@ public class PrototypeGUI extends javax.swing.JFrame {
            
            cusBUS.getList();
            showTable((ArrayList<customer>) cusBUS.getList());
+           //edit
         }       
     }
     private void delCustomer ()
@@ -111,6 +112,7 @@ public class PrototypeGUI extends javax.swing.JFrame {
            
            cusBUS.getList();
            showTable((ArrayList<customer>) cusBUS.getList());
+           //del
         }
     }
     
@@ -124,6 +126,7 @@ public class PrototypeGUI extends javax.swing.JFrame {
       cusBUS.add(cus);
       cusBUS.getList();
       showTable((ArrayList<customer>) cusBUS.getList());
+      //add
   }
   private void Search()
   {
