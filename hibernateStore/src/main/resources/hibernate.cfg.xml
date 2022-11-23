@@ -14,6 +14,7 @@
         <property name="connection.pool_size">4</property>    
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
+        <property name="hibernate.connection.autocommit">true</property>
         <!-- Disable the second-level cache -->
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property> 
         <!-- Show all executed SQL to console -->
@@ -22,6 +23,7 @@
         <mapping class="Entity.customer" />
         <mapping class="Entity.bill" />
         <mapping class="Entity.billdetail" />
+        <mapping class="Entity.category" />
     </session-factory>
 </hibernate-configuration>
 
