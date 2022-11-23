@@ -21,9 +21,13 @@
         <property name="show_sql">true</property>
         <mapping class="Entity.khachhang" />
         <mapping class="Entity.customer" />
+<<<<<<< HEAD
         <mapping class="Entity.bill" />
         <mapping class="Entity.billdetail" />
         <mapping class="Entity.category" />
+=======
+        <mapping class="Entity.product" />
+>>>>>>> nhu
     </session-factory>
 </hibernate-configuration>
 
