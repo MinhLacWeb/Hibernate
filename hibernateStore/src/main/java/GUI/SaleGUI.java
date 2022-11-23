@@ -28,18 +28,32 @@ public class SaleGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_product = new javax.swing.JTable();
         btn_add = new javax.swing.JToggleButton();
         btn_del = new javax.swing.JToggleButton();
-        btn_Refresh = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         btn_restore = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_student1 = new javax.swing.JTable();
+        tbl_cart = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_cart1 = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        btn_del1 = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        btn_Refresh = new javax.swing.JToggleButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,14 +61,63 @@ public class SaleGUI extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1300, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbl_product.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tbl_product.setForeground(new java.awt.Color(255, 153, 51));
-        tbl_product.setModel(new javax.swing.table.DefaultTableModel(
+        btn_add.setBackground(new java.awt.Color(102, 255, 102));
+        btn_add.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_add.setForeground(new java.awt.Color(255, 255, 255));
+        btn_add.setText("Thêm sản phẩm");
+        btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addMouseClicked(evt);
+            }
+        });
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 270, 330, 80));
+
+        btn_del.setBackground(new java.awt.Color(255, 0, 0));
+        btn_del.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btn_del.setForeground(new java.awt.Color(255, 255, 255));
+        btn_del.setText("Hủy giỏ hàng");
+        btn_del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_delActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_del, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 160, 60));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, 60));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 352, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(255, 153, 51));
+        jSeparator1.setForeground(new java.awt.Color(255, 153, 51));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 940, 10));
+
+        btn_restore.setBackground(new java.awt.Color(102, 255, 102));
+        btn_restore.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btn_restore.setForeground(new java.awt.Color(255, 255, 255));
+        btn_restore.setText("Thanh Toán");
+        btn_restore.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_restoreMouseClicked(evt);
+            }
+        });
+        btn_restore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restoreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_restore, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 620, 330, 90));
+
+        tbl_cart.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tbl_cart.setForeground(new java.awt.Color(255, 153, 51));
+        tbl_cart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ProductID", "ProductName", "Amout", "Price"
+                "TeacherID", "Lastname", "Firstname", "HireDate"
             }
         )
         {
@@ -64,45 +127,104 @@ public class SaleGUI extends javax.swing.JFrame {
         }
 
     );
-    tbl_product.setRowHeight(40);
-    tbl_product.setRowMargin(2);
-    tbl_product.setSelectionBackground(new java.awt.Color(153, 255, 153));
-    tbl_product.setSelectionForeground(new java.awt.Color(0, 0, 0));
-    tbl_product.addMouseListener(new java.awt.event.MouseAdapter() {
+    tbl_cart.setRowHeight(40);
+    tbl_cart.setRowMargin(2);
+    tbl_cart.setSelectionBackground(new java.awt.Color(153, 255, 153));
+    tbl_cart.setSelectionForeground(new java.awt.Color(0, 0, 0));
+    tbl_cart.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tbl_productMouseClicked(evt);
+            tbl_cartMouseClicked(evt);
         }
     });
-    jScrollPane1.setViewportView(tbl_product);
+    jScrollPane2.setViewportView(tbl_cart);
 
-    jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1270, 210));
+    jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 940, 290));
+    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 60, 180, 40));
 
-    btn_add.setBackground(new java.awt.Color(102, 255, 102));
-    btn_add.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-    btn_add.setForeground(new java.awt.Color(255, 255, 255));
-    btn_add.setText("Thêm");
-    btn_add.addMouseListener(new java.awt.event.MouseAdapter() {
+    jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel3.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel3.setText("Giỏ hàng");
+    jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 90, 50));
+
+    jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel5.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel5.setText("VNĐ");
+    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 560, 50, 50));
+
+    tbl_cart1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    tbl_cart1.setForeground(new java.awt.Color(255, 153, 51));
+    tbl_cart1.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+        },
+        new String [] {
+            "TeacherID", "Lastname", "Firstname", "HireDate"
+        }
+    )
+    {
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    }
+
+    );
+    tbl_cart1.setRowHeight(40);
+    tbl_cart1.setRowMargin(2);
+    tbl_cart1.setSelectionBackground(new java.awt.Color(153, 255, 153));
+    tbl_cart1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+    tbl_cart1.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mouseClicked(java.awt.event.MouseEvent evt) {
-            btn_addMouseClicked(evt);
+            tbl_cart1MouseClicked(evt);
         }
     });
-    btn_add.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btn_addActionPerformed(evt);
-        }
-    });
-    jPanel1.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 610, 230, 90));
+    jScrollPane3.setViewportView(tbl_cart1);
 
-    btn_del.setBackground(new java.awt.Color(255, 0, 0));
-    btn_del.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    btn_del.setForeground(new java.awt.Color(255, 255, 255));
-    btn_del.setText("Xóa");
-    btn_del.addActionListener(new java.awt.event.ActionListener() {
+    jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 940, 290));
+
+    jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel6.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel6.setText("Danh sách sản phẩm");
+    jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 210, 50));
+
+    jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel7.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel7.setText("Số lượng:");
+    jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, 100, 50));
+    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 220, 220, 40));
+
+    jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel8.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel8.setText("ID SP:");
+    jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 160, 100, 50));
+
+    jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 110, 220, 40));
+
+    jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel9.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel9.setText("Loại SP:");
+    jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 100, 80, 50));
+    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, 220, 40));
+
+    btn_del1.setBackground(new java.awt.Color(255, 0, 0));
+    btn_del1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    btn_del1.setForeground(new java.awt.Color(255, 255, 255));
+    btn_del1.setText("Xóa");
+    btn_del1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btn_delActionPerformed(evt);
+            btn_del1ActionPerformed(evt);
         }
     });
-    jPanel1.add(btn_del, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 610, 230, 90));
+    jPanel1.add(btn_del1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 170, 60));
+
+    jButton1.setText("...");
+    jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 60, 40, 40));
 
     btn_Refresh.setBackground(new java.awt.Color(102, 255, 255));
     btn_Refresh.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -118,63 +240,25 @@ public class SaleGUI extends javax.swing.JFrame {
             btn_RefreshActionPerformed(evt);
         }
     });
-    jPanel1.add(btn_Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 610, 230, 90));
-    jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, 60));
-    jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 352, -1, -1));
+    jPanel1.add(btn_Refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 330, 70));
 
-    jSeparator1.setBackground(new java.awt.Color(255, 153, 51));
-    jSeparator1.setForeground(new java.awt.Color(255, 153, 51));
-    jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 1270, 10));
+    jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel10.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel10.setText("Mã KH:");
+    jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 50, 80, 50));
 
-    jSeparator2.setBackground(new java.awt.Color(255, 153, 51));
-    jSeparator2.setForeground(new java.awt.Color(255, 153, 51));
-    jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 1270, 10));
+    jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel11.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel11.setText("Thành tiền:");
+    jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 560, 130, 50));
 
-    btn_restore.setBackground(new java.awt.Color(102, 255, 102));
-    btn_restore.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-    btn_restore.setForeground(new java.awt.Color(255, 255, 255));
-    btn_restore.setText("Thanh Toán");
-    btn_restore.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            btn_restoreMouseClicked(evt);
-        }
-    });
-    btn_restore.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btn_restoreActionPerformed(evt);
-        }
-    });
-    jPanel1.add(btn_restore, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 610, 230, 90));
-
-    tbl_student1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    tbl_student1.setForeground(new java.awt.Color(255, 153, 51));
-    tbl_student1.setModel(new javax.swing.table.DefaultTableModel(
-        new Object [][] {
-
-        },
-        new String [] {
-            "TeacherID", "Lastname", "Firstname", "HireDate"
-        }
-    )
-    {
-        public boolean isCellEditable(int row, int column){
-            return false;
-        }
-    }
-
-    );
-    tbl_student1.setRowHeight(40);
-    tbl_student1.setRowMargin(2);
-    tbl_student1.setSelectionBackground(new java.awt.Color(153, 255, 153));
-    tbl_student1.setSelectionForeground(new java.awt.Color(0, 0, 0));
-    tbl_student1.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            tbl_student1MouseClicked(evt);
-        }
-    });
-    jScrollPane2.setViewportView(tbl_student1);
-
-    jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 1270, 190));
+    jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+    jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jLabel12.setForeground(new java.awt.Color(255, 153, 51));
+    jLabel12.setText("...");
+    jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 560, 170, 50));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -200,10 +284,6 @@ public class SaleGUI extends javax.swing.JFrame {
     pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbl_productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_productMouseClicked
-        //        showStudentValue();
-    }//GEN-LAST:event_tbl_productMouseClicked
-
     private void btn_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_addMouseClicked
@@ -216,21 +296,6 @@ public class SaleGUI extends javax.swing.JFrame {
     private void btn_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delActionPerformed
         //        delStudent();
     }//GEN-LAST:event_btn_delActionPerformed
-
-    private void btn_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RefreshMouseClicked
-        //        showTable(student);
-    }//GEN-LAST:event_btn_RefreshMouseClicked
-
-    private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
-        //        try {
-            //            // TODO add your handling code here:
-            //            stBUS.listStudent();
-            //            student = stBUS.getList();
-            //            showTable(student);
-            //        } catch (ClassNotFoundException ex) {
-            //            Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
-    }//GEN-LAST:event_btn_RefreshActionPerformed
 
     private void btn_restoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_restoreMouseClicked
         // TODO add your handling code here:
@@ -245,9 +310,32 @@ public class SaleGUI extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_btn_restoreActionPerformed
 
-    private void tbl_student1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_student1MouseClicked
+    private void tbl_cartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cartMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tbl_student1MouseClicked
+    }//GEN-LAST:event_tbl_cartMouseClicked
+
+    private void tbl_cart1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_cart1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_cart1MouseClicked
+
+    private void btn_del1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_del1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_del1ActionPerformed
+
+    private void btn_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RefreshMouseClicked
+        //        showTable(category);
+    }//GEN-LAST:event_btn_RefreshMouseClicked
+
+    private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
+        //        try {
+            //            // TODO add your handling code here:
+            //            cateBUS.listCategory();
+            //            category = cateBUS.getList();
+            //            showTable(category);
+            //        } catch (ClassNotFoundException ex) {
+            //            Logger.getLogger(CategoryManagement.class.getName()).log(Level.SEVERE, null, ex);
+            //        }
+    }//GEN-LAST:event_btn_RefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,15 +376,29 @@ public class SaleGUI extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_Refresh;
     private javax.swing.JToggleButton btn_add;
     private javax.swing.JToggleButton btn_del;
+    private javax.swing.JToggleButton btn_del1;
     private javax.swing.JToggleButton btn_restore;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable tbl_product;
-    private javax.swing.JTable tbl_student1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl_cart;
+    private javax.swing.JTable tbl_cart1;
     // End of variables declaration//GEN-END:variables
 }
