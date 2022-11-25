@@ -13,13 +13,19 @@ import java.util.List;
 
 public class CategoryBUS {
     private List<category> cateList;
-
+    
     public CategoryBUS() {
         cateList = null;
     }
 
     public List<category> getList() {
         return cateList;
+    }
+    
+    public void list() {
+        CategoryDAL cateDAL = new CategoryDAL();
+        cateList = new ArrayList<>();
+        cateList = cateDAL.loadCategory();
     }
 
     public category getCategoryById(String cateID) {
@@ -30,13 +36,21 @@ public class CategoryBUS {
         }
         return null;
     }
-
-    public void list() {
-        CategoryDAL cateDAL = new CategoryDAL();
-        cateList = new ArrayList<>();
-        cateList = cateDAL.loadCategory();
+    
+    
+    
+    public boolean CheckCategoryID(int categoryID)
+    {
+        for(category cate : cateList)
+        {
+            if(cate.getCategoryID()== categoryID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
-
+    
     public void add(category category) {
         CategoryDAL cateDAL = new CategoryDAL();
         cateDAL.addCategory(category);
@@ -64,4 +78,25 @@ public class CategoryBUS {
             }
         }
     }
+    
+    public ArrayList<category> search(String categoryID, String name, String description)
+    {
+        ArrayList<category> search = new ArrayList<>();
+        categoryID = categoryID.isEmpty()?categoryID = "": categoryID;
+        name = name.isEmpty()?name = "": name;
+        description = description.isEmpty()?description = "": description;
+        for(category c: cateList)
+        {
+            if( Integer.toString(c.getCategoryID()).contains(categoryID) && 
+                c.getName().contains(name) && 
+                (c.getDescription()).contains(description))
+            {
+                search.add(c);
+            }
+        }
+        return search;
+    }
+    
+    
+    
 }

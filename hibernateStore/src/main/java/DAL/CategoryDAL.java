@@ -21,15 +21,16 @@ public class CategoryDAL {
     public List loadCategory() {
         List<category> category;
         session.beginTransaction();
-        category = session.createQuery("FROM category", category.class).list();
+        category = session.createQuery("FROM category ", category.class).list();
         session.getTransaction().commit();
         return category;
-
     }
     
     public void addCategory(category c)
     {
+        session.beginTransaction();
         session.save(c);  
+        session.getTransaction().commit();
     }
     
     public void updateCategory(category c)
@@ -41,6 +42,9 @@ public class CategoryDAL {
     
     public void deleteCategory(category c)
     {
+        session.beginTransaction();
         session.delete(c);
+        session.getTransaction().commit();
+        
     }
 }

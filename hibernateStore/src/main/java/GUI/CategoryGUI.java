@@ -17,21 +17,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CategoryGUI extends javax.swing.JFrame {
+  public class CategoryGUI extends javax.swing.JFrame {
 
    CategoryBUS cateBUS = new CategoryBUS();
+   ArrayList<category> category = (ArrayList<category>) cateBUS.getList();
    
-//    ArrayList<category> Category = (ArrayList<category>) cateBUS.getList();  
-    
     public CategoryGUI() throws ClassNotFoundException {
             initComponents();
-//            tbl_category.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD, 12));
-//            tbl_category.getTableHeader().setOpaque(false);
-//            tbl_category.getTableHeader().setBackground(Color.orange);
-            
-           
-            cateBUS.list();
-            
+            tbl_category.getTableHeader().setFont(new Font("Segoe UI",Font.BOLD, 12));
+            tbl_category.getTableHeader().setOpaque(false);
+            tbl_category.getTableHeader().setBackground(Color.orange);
+            list();
             showTable((ArrayList<category>) cateBUS.getList());
 
     }
@@ -51,6 +47,8 @@ public class CategoryGUI extends javax.swing.JFrame {
         }
         tbl_category.setModel(defaultModel);
     }
+    
+    
        private void showCategoryValue()
         {
             int row = tbl_category.getSelectedRow();
@@ -62,19 +60,26 @@ public class CategoryGUI extends javax.swing.JFrame {
                 txt_description.setText(tbl_category.getModel().getValueAt(row, 2).toString());
             }
         }
-//    public void list() // Chép ArrayList lên table
-//    {
-//        if (cateBUS.getList() == null) {
-//            cateBUS.list();
-//        }
-//        ArrayList<category> arrCategory = (ArrayList<category>) cateBUS.getList();
-////        model.setRowCount(0);
-//        showTable(arrCategory);
-//    }
+    public void list() // Chép ArrayList lên table
+    {
+        if (cateBUS.getList() == null) {
+            cateBUS.list();
+        }
+        ArrayList<category> arrCategory = (ArrayList<category>) cateBUS.getList();
+//        model.setRowCount(0);
+        showTable(arrCategory);
+    }
 
-//    
-//   
-//    
+    private void Search()
+    {
+        String categoryID = txt_categoryIDSearch.getText();
+        String name = txt_nameSearch.getText();
+        String description = txt_decriptionSearch.getText();
+        showTable(cateBUS.search(categoryID,name,description));
+    }
+ 
+    
+    
     private void editCategory()
            
     {
@@ -84,55 +89,69 @@ public class CategoryGUI extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
            JOptionPane.ERROR_MESSAGE);
         }else{
-           int categoryID = (int) tbl_category.getModel().getValueAt(row, 0);
-//           int categoryID = Integer.parseInt(txt_categoryID.getText());
-           
+           int categoryID = (int) tbl_category.getModel().getValueAt(row, 0);     
            String name = txt_name.getText();
            String description = txt_description.getText();
            
            category cate = new category(categoryID, name, description);
            cateBUS.set(cate);
            
-           JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công", "Dialog",
-                   JOptionPane.ERROR_MESSAGE);
+                   JOptionPane.showMessageDialog(new JFrame(), "Sửa thành công");
            
-           cateBUS.getList();
-           showTable((ArrayList<category>) cateBUS.getList());
+           refresh();
         }
-        
     }
     
     
+    private void delCategory(){
+        int row = tbl_category.getSelectedRow();
+        if (row == -1){
+            JOptionPane.showMessageDialog(new JFrame(), "Chưa chọn dòng để sửa", "Dialog",
+            JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            int categoryID = (int)tbl_category.getModel().getValueAt(row, 0);
+            
+            String name = txt_name.getText();
+            String description = txt_description.getText();
+            
+            category cate = new category(categoryID, name, description);
+            cateBUS.delete(cate);
+            
+                JOptionPane.showMessageDialog(new JFrame(), "Xoá thành công");
+                
+            category = (ArrayList<category>) cateBUS.getList();
+            showTable((ArrayList<category>) cateBUS.getList());
+            resetText();
+            row = -1;
+       }      
+    }
     
-//   
-//    
-//    private void Search()
-//    {
-//        int categoryID = jlb_categoryID.getText();
-//        String name = jlb_name.getText();
-//        String description=jlb_description.getText();
-//        showTable(cateBUS.search(categoryID, name, description));
+    
+//    private void addProduct(){
+//        int productID = tbl_product.getRowCount()+1;
+//        int categoryID = Integer.parseInt(txtCategoryID.getText());
+//        String product_name = txtProductName.getText();
+//        int amount = Integer.parseInt(txtAmount.getText());
+//        float price = Float.parseFloat(txtPrice.getText()); 
+//        product pro = new product(productID, categoryID, product_name, amount, price);
+//        proBUS.add(pro);
+//        proBUS.getList();
+//        showTable((ArrayList<product>) proBUS.getList());
 //    }
-//    
-//    private void delCategory(){
-//        int row = tbl_category.getSelectedRow();
-//        try {    
-//           int categoryID = (int)tbl_category.getModel().getValueAt(row, 0);
-//           String lastName = tbl_category.getModel().getValueAt(row, 1).toString();
-//           String firstName = tbl_category.getModel().getValueAt(row, 2).toString();
-//           String hireDate = tbl_category.getModel().getValueAt(row, 3).toString();
-//           int status = 0;
-//           Category tc = new Category(categoryID, lastName, firstName, hireDate, status);
-//           cateBUS.ChangeStatusCategory(tc);
-//           category = cateBUS.getList();
-//           cateBUS.getList();
-//           showTable(category);
-//        } catch (ClassNotFoundException ex) { 
-//            Logger.getLogger(CategoryManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    //    
-//    
+    public void refresh(){
+        cateBUS.list();
+        category = (ArrayList<category>) cateBUS.getList();
+        showTable((ArrayList<category>) cateBUS.getList());
+    }
+    
+    
+    private void resetText(){
+        txt_categoryID.setText("");
+        txt_name.setText("");
+        txt_description.setText("");
+    }
+    
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -149,7 +168,7 @@ public class CategoryGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jlb_categoryID = new javax.swing.JTextField();
+        txt_categoryIDSearch = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_decriptionSearch = new javax.swing.JTextField();
@@ -269,19 +288,19 @@ public class CategoryGUI extends javax.swing.JFrame {
     jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 352, 146, 50));
     jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 352, -1, -1));
 
-    jlb_categoryID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-    jlb_categoryID.setForeground(new java.awt.Color(255, 153, 51));
-    jlb_categoryID.addActionListener(new java.awt.event.ActionListener() {
+    txt_categoryIDSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    txt_categoryIDSearch.setForeground(new java.awt.Color(255, 153, 51));
+    txt_categoryIDSearch.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jlb_categoryIDActionPerformed(evt);
+            txt_categoryIDSearchActionPerformed(evt);
         }
     });
-    jlb_categoryID.addKeyListener(new java.awt.event.KeyAdapter() {
+    txt_categoryIDSearch.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
-            jlb_categoryIDKeyReleased(evt);
+            txt_categoryIDSearchKeyReleased(evt);
         }
     });
-    jPanel1.add(jlb_categoryID, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 270, 52));
+    jPanel1.add(txt_categoryIDSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 270, 52));
 
     jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     jLabel5.setForeground(new java.awt.Color(255, 153, 51));
@@ -421,13 +440,13 @@ public class CategoryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addMouseClicked
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-//        AddCategory a = new AddCategory();
-//        a.setVisible(true);
+        CategoryAdd a = new CategoryAdd();
+        a.setVisible(true);
 
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delActionPerformed
-//        delCategory();
+        delCategory();
 
     }//GEN-LAST:event_btn_delActionPerformed
 
@@ -436,29 +455,22 @@ public class CategoryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     private void btn_RefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RefreshMouseClicked
-//        showTable(category);
 
     }//GEN-LAST:event_btn_RefreshMouseClicked
 
     private void btn_RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_RefreshActionPerformed
-//        try {
-//            // TODO add your handling code here:
-//            cateBUS.listCategory();
-//            category = cateBUS.getList();
-//            showTable(category);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(CategoryManagement.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        // TODO add your handling code here:
+        refresh();
     }//GEN-LAST:event_btn_RefreshActionPerformed
 
-    private void jlb_categoryIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_categoryIDActionPerformed
+    private void txt_categoryIDSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_categoryIDSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlb_categoryIDActionPerformed
+    }//GEN-LAST:event_txt_categoryIDSearchActionPerformed
 
-    private void jlb_categoryIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_categoryIDKeyReleased
+    private void txt_categoryIDSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_categoryIDSearchKeyReleased
         // TODO add your handling code here:
-//        Search();
-    }//GEN-LAST:event_jlb_categoryIDKeyReleased
+        Search();
+    }//GEN-LAST:event_txt_categoryIDSearchKeyReleased
 
     private void txt_decriptionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_decriptionSearchActionPerformed
         // TODO add your handling code here:
@@ -466,7 +478,7 @@ public class CategoryGUI extends javax.swing.JFrame {
 
     private void txt_decriptionSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_decriptionSearchKeyReleased
         // TODO add your handling code here:
-//        Search();
+            Search();
     }//GEN-LAST:event_txt_decriptionSearchKeyReleased
 
     private void txt_nameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameSearchActionPerformed
@@ -475,7 +487,7 @@ public class CategoryGUI extends javax.swing.JFrame {
 
     private void txt_nameSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameSearchKeyReleased
         // TODO add your handling code here:
-//        Search();
+            Search();
     }//GEN-LAST:event_txt_nameSearchKeyReleased
 
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
@@ -554,11 +566,11 @@ public class CategoryGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel jlb_category;
-    private javax.swing.JTextField jlb_categoryID;
     private javax.swing.JLabel jlb_description;
     private javax.swing.JLabel jlb_name;
     private javax.swing.JTable tbl_category;
     private javax.swing.JLabel txt_categoryID;
+    private javax.swing.JTextField txt_categoryIDSearch;
     private javax.swing.JTextField txt_decriptionSearch;
     private javax.swing.JTextField txt_description;
     private javax.swing.JTextField txt_name;
