@@ -51,6 +51,15 @@ public class BillGUI extends javax.swing.JFrame {
 //        model.setRowCount(0);
         outModel(arrBill);
     }
+    
+    private void Search()
+    {
+        String billID = jlb_billid.getText();
+        String customerID = jlb_customerid.getText();
+        String date = jlb_date.getText();
+        
+        outModel(bBUS.search(billID,customerID,date));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,15 +79,15 @@ public class BillGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jlb_studentid = new javax.swing.JTextField();
+        jlb_billid = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jlb_ed = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jlb_ln = new javax.swing.JTextField();
+        jlb_customerid = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jlb_fn = new javax.swing.JTextField();
+        jlb_date = new javax.swing.JTextField();
         txt_studentID = new javax.swing.JLabel();
         jlb_lastname = new javax.swing.JLabel();
         jlb_firstname = new javax.swing.JLabel();
@@ -171,19 +180,19 @@ public class BillGUI extends javax.swing.JFrame {
     jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 352, 146, 50));
     jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 352, -1, -1));
 
-    jlb_studentid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-    jlb_studentid.setForeground(new java.awt.Color(255, 153, 51));
-    jlb_studentid.addActionListener(new java.awt.event.ActionListener() {
+    jlb_billid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    jlb_billid.setForeground(new java.awt.Color(255, 153, 51));
+    jlb_billid.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jlb_studentidActionPerformed(evt);
+            jlb_billidActionPerformed(evt);
         }
     });
-    jlb_studentid.addKeyListener(new java.awt.event.KeyAdapter() {
+    jlb_billid.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
-            jlb_studentidKeyReleased(evt);
+            jlb_billidKeyReleased(evt);
         }
     });
-    jPanel1.add(jlb_studentid, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 190, 52));
+    jPanel1.add(jlb_billid, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 190, 52));
 
     jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     jLabel5.setForeground(new java.awt.Color(255, 153, 51));
@@ -218,38 +227,38 @@ public class BillGUI extends javax.swing.JFrame {
     jLabel9.setText("CustomerID:");
     jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 140, 52));
 
-    jlb_ln.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    jlb_ln.setForeground(new java.awt.Color(255, 153, 51));
-    jlb_ln.addActionListener(new java.awt.event.ActionListener() {
+    jlb_customerid.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jlb_customerid.setForeground(new java.awt.Color(255, 153, 51));
+    jlb_customerid.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jlb_lnActionPerformed(evt);
+            jlb_customeridActionPerformed(evt);
         }
     });
-    jlb_ln.addKeyListener(new java.awt.event.KeyAdapter() {
+    jlb_customerid.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
-            jlb_lnKeyReleased(evt);
+            jlb_customeridKeyReleased(evt);
         }
     });
-    jPanel1.add(jlb_ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 180, 52));
+    jPanel1.add(jlb_customerid, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 180, 52));
 
     jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     jLabel10.setForeground(new java.awt.Color(255, 153, 51));
     jLabel10.setText("Date:");
     jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, 110, 52));
 
-    jlb_fn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    jlb_fn.setForeground(new java.awt.Color(255, 153, 51));
-    jlb_fn.addActionListener(new java.awt.event.ActionListener() {
+    jlb_date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    jlb_date.setForeground(new java.awt.Color(255, 153, 51));
+    jlb_date.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jlb_fnActionPerformed(evt);
+            jlb_dateActionPerformed(evt);
         }
     });
-    jlb_fn.addKeyListener(new java.awt.event.KeyAdapter() {
+    jlb_date.addKeyListener(new java.awt.event.KeyAdapter() {
         public void keyReleased(java.awt.event.KeyEvent evt) {
-            jlb_fnKeyReleased(evt);
+            jlb_dateKeyReleased(evt);
         }
     });
-    jPanel1.add(jlb_fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, 200, 52));
+    jPanel1.add(jlb_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, 200, 52));
 
     txt_studentID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     txt_studentID.setForeground(new java.awt.Color(255, 153, 51));
@@ -338,14 +347,14 @@ public class BillGUI extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_btn_RefreshActionPerformed
 
-    private void jlb_studentidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_studentidActionPerformed
+    private void jlb_billidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_billidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlb_studentidActionPerformed
+    }//GEN-LAST:event_jlb_billidActionPerformed
 
-    private void jlb_studentidKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_studentidKeyReleased
+    private void jlb_billidKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_billidKeyReleased
         // TODO add your handling code here:
-        //        Search();
-    }//GEN-LAST:event_jlb_studentidKeyReleased
+                Search();
+    }//GEN-LAST:event_jlb_billidKeyReleased
 
     private void jlb_edActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_edActionPerformed
         // TODO add your handling code here:
@@ -356,23 +365,23 @@ public class BillGUI extends javax.swing.JFrame {
         //        Search();
     }//GEN-LAST:event_jlb_edKeyReleased
 
-    private void jlb_lnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_lnActionPerformed
+    private void jlb_customeridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_customeridActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlb_lnActionPerformed
+    }//GEN-LAST:event_jlb_customeridActionPerformed
 
-    private void jlb_lnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_lnKeyReleased
+    private void jlb_customeridKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_customeridKeyReleased
         // TODO add your handling code here:
         //        Search();
-    }//GEN-LAST:event_jlb_lnKeyReleased
+    }//GEN-LAST:event_jlb_customeridKeyReleased
 
-    private void jlb_fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_fnActionPerformed
+    private void jlb_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlb_dateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jlb_fnActionPerformed
+    }//GEN-LAST:event_jlb_dateActionPerformed
 
-    private void jlb_fnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_fnKeyReleased
+    private void jlb_dateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jlb_dateKeyReleased
         // TODO add your handling code here:
         //        Search();
-    }//GEN-LAST:event_jlb_fnKeyReleased
+    }//GEN-LAST:event_jlb_dateKeyReleased
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         //        AddStudent a = new AddStudent();
@@ -433,14 +442,14 @@ public class BillGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jlb_billid;
+    private javax.swing.JTextField jlb_customerid;
+    private javax.swing.JTextField jlb_date;
     private javax.swing.JTextField jlb_ed;
     private javax.swing.JLabel jlb_firstname;
     private javax.swing.JLabel jlb_firstname1;
-    private javax.swing.JTextField jlb_fn;
     private javax.swing.JLabel jlb_lastname;
-    private javax.swing.JTextField jlb_ln;
     private javax.swing.JLabel jlb_student1;
-    private javax.swing.JTextField jlb_studentid;
     private javax.swing.JTable tbl_bill;
     private javax.swing.JLabel txt_studentID;
     private javax.swing.JLabel txt_studentID1;

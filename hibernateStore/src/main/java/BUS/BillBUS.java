@@ -69,4 +69,22 @@ public class BillBUS {
             }
         }
     }
+    
+    public ArrayList<bill> search(String billID, String customerID, String date)
+    {
+        ArrayList<bill> search = new ArrayList<>();
+        billID = billID.isEmpty()?billID = "": billID;
+        customerID = customerID.isEmpty()?customerID = "": customerID;
+        date = date.isEmpty()?date = "": date;
+        for(bill b: billList)
+        {
+            if( Integer.toString(b.getBillID()).contains(billID) && 
+                Integer.toString(b.getCustomerID()).contains(customerID) && 
+                (b.getDate()).contains(date))
+            {
+                search.add(b);
+            }
+        }
+        return search;
+    }
 }
